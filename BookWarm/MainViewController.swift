@@ -29,7 +29,7 @@ class MainViewController: UICollectionViewController {
     }
     @IBAction func serchBarButtonDidTapped(_ sender: UIBarButtonItem) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let searchVC = storyBoard.instantiateViewController(withIdentifier: String(describing: SearchViewController.self))
+        let searchVC = storyBoard.instantiateViewController(withIdentifier: String(describing: SearchViewController.self)) as! SearchViewController
         let navigationController = UINavigationController(rootViewController: searchVC)
         navigationController.modalPresentationStyle = .fullScreen
         
@@ -60,9 +60,12 @@ class MainViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let detailVC = storyBoard.instantiateViewController(withIdentifier: String(describing: DetailViewController.self))
+        let detailVC = storyBoard.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
         
-        detailVC.title = bookList[indexPath.item].title
+        detailVC.bookTitle = bookList[indexPath.item].title
+        detailVC.bookRate = bookList[indexPath.item].rate
+        detailVC.bookOverView = bookList[indexPath.item].overview
+        
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
