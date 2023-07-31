@@ -65,6 +65,7 @@ class MainViewController: UICollectionViewController {
         detailVC.bookTitle = bookList[indexPath.item].title
         detailVC.bookRate = bookList[indexPath.item].rate
         detailVC.bookOverView = bookList[indexPath.item].overview
+        detailVC.coverImage = UIImage(named: bookList[indexPath.item].title)
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
