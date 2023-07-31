@@ -31,13 +31,11 @@ class DetailViewController: UIViewController {
         let oneAndHalfStarsCount = countingStar(with: bookRate)
         (0...oneAndHalfStarsCount.one - 1).forEach { i in
             starCollection[i].image = UIImage(systemName: "star.fill")
-            starCollection[i].tintColor = .systemYellow
         }
         
         let halfStarIndex = oneAndHalfStarsCount.one
         let halfStarCount = oneAndHalfStarsCount.half
         starCollection[halfStarIndex].image = halfStarCount == 1 ? UIImage(systemName: "star.fill.left") : UIImage(systemName: "star")
-        starCollection[halfStarIndex].tintColor = halfStarCount == 1 ? .systemYellow : .black
         overViewTextView.text = bookOverView
         coverImageView.image = coverImage
     }

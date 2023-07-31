@@ -38,7 +38,6 @@ class MainViewController: UICollectionViewController {
         }
 
         searchVC.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), primaryAction: dismissAction)
-        searchVC.navigationItem.leftBarButtonItem?.tintColor = .black
         
         searchVC.title = "검색 화면"
         
@@ -53,7 +52,7 @@ class MainViewController: UICollectionViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier, for: indexPath) as? MainCollectionViewCell else { return UICollectionViewCell() }
         
         cell.backgroundColor = .random()
-        cell.rounded(cornerRadius: 10)
+        cell.rounded(cornerRadius: 10, isShadowBackground: true)
         cell.update(with: bookList[indexPath.item])
         return cell
     }
