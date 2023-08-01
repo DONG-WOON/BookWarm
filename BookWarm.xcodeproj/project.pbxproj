@@ -53,6 +53,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		722BBB592A78EC3F00E6AC90 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				72ABE2B52A779E5000FDE2A2 /* Extension+UIView.swift */,
+				72ABE2B72A779F2400FDE2A2 /* Extension+UIColor.swift */,
+				722BBB1B2A78A1F800E6AC90 /* Extension+UICollectionViewFlowLayout.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		722BBB5A2A78EC5C00E6AC90 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				72ABE29F2A779A3600FDE2A2 /* MainViewController.swift */,
+				72ABE2AF2A779AD800FDE2A2 /* MainCollectionViewCell.swift */,
+				72ABE2B02A779AD800FDE2A2 /* MainCollectionViewCell.xib */,
+				72ABE2A12A779A3600FDE2A2 /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		722BBB5B2A78EC6300E6AC90 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				72ABE2B32A779C9600FDE2A2 /* Book.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		722BBB5C2A78EC7E00E6AC90 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				72ABE2BB2A77A56900FDE2A2 /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		722BBB5D2A78EC8E00E6AC90 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				72ABE2B92A77A54D00FDE2A2 /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		72ABE28F2A779A3600FDE2A2 = {
 			isa = PBXGroup;
 			children = (
@@ -74,16 +119,11 @@
 			children = (
 				72ABE29B2A779A3600FDE2A2 /* AppDelegate.swift */,
 				72ABE29D2A779A3600FDE2A2 /* SceneDelegate.swift */,
-				72ABE29F2A779A3600FDE2A2 /* MainViewController.swift */,
-				72ABE2B52A779E5000FDE2A2 /* Extension+UIView.swift */,
-				72ABE2B72A779F2400FDE2A2 /* Extension+UIColor.swift */,
-				722BBB1B2A78A1F800E6AC90 /* Extension+UICollectionViewFlowLayout.swift */,
-				72ABE2B32A779C9600FDE2A2 /* Book.swift */,
-				72ABE2AF2A779AD800FDE2A2 /* MainCollectionViewCell.swift */,
-				72ABE2B02A779AD800FDE2A2 /* MainCollectionViewCell.xib */,
-				72ABE2A12A779A3600FDE2A2 /* Main.storyboard */,
-				72ABE2BB2A77A56900FDE2A2 /* DetailViewController.swift */,
-				72ABE2B92A77A54D00FDE2A2 /* SearchViewController.swift */,
+				722BBB5B2A78EC6300E6AC90 /* Model */,
+				722BBB5A2A78EC5C00E6AC90 /* Main */,
+				722BBB5C2A78EC7E00E6AC90 /* Detail */,
+				722BBB5D2A78EC8E00E6AC90 /* Search */,
+				722BBB592A78EC3F00E6AC90 /* Extension */,
 				72ABE2A42A779A3700FDE2A2 /* Assets.xcassets */,
 				72ABE2A62A779A3700FDE2A2 /* LaunchScreen.storyboard */,
 				72ABE2A92A779A3700FDE2A2 /* Info.plist */,
