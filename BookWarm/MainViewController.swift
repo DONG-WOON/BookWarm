@@ -13,24 +13,16 @@ class MainViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let nib = UINib(nibName: MainCollectionViewCell.identifier, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
         
-        let flowLayout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 10.0
-        let deviceWidth = UIScreen.main.bounds.width
-        let itemWidth = (deviceWidth - (spacing * 3)) / 2
-        
-        flowLayout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth)
-        
-        collectionView.collectionViewLayout = flowLayout
+        collectionView.collectionViewLayout = DefaultCollectionViewFlowLayout()
     }
     @IBAction func serchBarButtonDidTapped(_ sender: UIBarButtonItem) {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let searchVC = storyBoard.instantiateViewController(withIdentifier: String(describing: SearchViewController.self)) as! SearchViewController
+        let searchVC = storyboard?.instantiateViewController(withIdentifier: String(describing: SearchViewController.self)) as! SearchViewController
         let navigationController = UINavigationController(rootViewController: searchVC)
+        
         navigationController.modalPresentationStyle = .fullScreen
         
         let dismissAction = UIAction { _ in
@@ -38,7 +30,6 @@ class MainViewController: UICollectionViewController {
         }
 
         searchVC.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), primaryAction: dismissAction)
-        
         searchVC.title = "검색 화면"
         
         present(navigationController, animated: true)
@@ -54,12 +45,12 @@ class MainViewController: UICollectionViewController {
         cell.backgroundColor = .random()
         cell.rounded(cornerRadius: 10, isShadowBackground: true)
         cell.update(with: bookList[indexPath.item])
+        
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let detailVC = storyBoard.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
+        let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
         
         detailVC.bookTitle = bookList[indexPath.item].title
         detailVC.bookRate = bookList[indexPath.item].rate

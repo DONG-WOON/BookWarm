@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		722BBB1C2A78A1F800E6AC90 /* Extension+UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BBB1B2A78A1F800E6AC90 /* Extension+UICollectionViewFlowLayout.swift */; };
 		72ABE29C2A779A3600FDE2A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ABE29B2A779A3600FDE2A2 /* AppDelegate.swift */; };
 		72ABE29E2A779A3600FDE2A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ABE29D2A779A3600FDE2A2 /* SceneDelegate.swift */; };
 		72ABE2A02A779A3600FDE2A2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ABE29F2A779A3600FDE2A2 /* MainViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		722BBB1B2A78A1F800E6AC90 /* Extension+UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionViewFlowLayout.swift"; sourceTree = "<group>"; };
 		72ABE2982A779A3600FDE2A2 /* BookWarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookWarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72ABE29B2A779A3600FDE2A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72ABE29D2A779A3600FDE2A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				72ABE29F2A779A3600FDE2A2 /* MainViewController.swift */,
 				72ABE2B52A779E5000FDE2A2 /* Extension+UIView.swift */,
 				72ABE2B72A779F2400FDE2A2 /* Extension+UIColor.swift */,
+				722BBB1B2A78A1F800E6AC90 /* Extension+UICollectionViewFlowLayout.swift */,
 				72ABE2B32A779C9600FDE2A2 /* Book.swift */,
 				72ABE2AF2A779AD800FDE2A2 /* MainCollectionViewCell.swift */,
 				72ABE2B02A779AD800FDE2A2 /* MainCollectionViewCell.xib */,
@@ -160,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				722BBB1C2A78A1F800E6AC90 /* Extension+UICollectionViewFlowLayout.swift in Sources */,
 				72ABE2BC2A77A56900FDE2A2 /* DetailViewController.swift in Sources */,
 				72ABE2A02A779A3600FDE2A2 /* MainViewController.swift in Sources */,
 				72ABE29C2A779A3600FDE2A2 /* AppDelegate.swift in Sources */,
