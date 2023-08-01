@@ -52,10 +52,7 @@ class MainViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
         
-        detailVC.bookTitle = bookList[indexPath.item].title
-        detailVC.bookRate = bookList[indexPath.item].rate
-        detailVC.bookOverView = bookList[indexPath.item].overview
-        detailVC.coverImage = UIImage(named: bookList[indexPath.item].title)
+        detailVC.book = bookList[indexPath.item]
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
