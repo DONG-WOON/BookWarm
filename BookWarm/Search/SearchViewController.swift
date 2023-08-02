@@ -12,13 +12,17 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var bookSearchBar: UISearchBar!
     @IBOutlet weak var bookTableView: UITableView!
     
-    var filteredBooks: [Book] = books.shuffled().dropLast(3)
+    var filteredBooks: [Book] = books.shuffled()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         bookSearchBar.delegate = self
         bookTableView.dataSource = self
+        bookTableView.delegate = self
+        
+        let nib = UINib(nibName: ExploreTableViewCell.identifier, bundle: nil)
+        bookTableView.register(nib, forCellReuseIdentifier: ExploreTableViewCell.identifier)
     }
 }
 
@@ -27,31 +31,33 @@ extension SearchViewController: UISearchBarDelegate {
         if !searchText.isEmpty {
             filteredBooks = books.filter { $0.title.contains(searchText) }
         } else {
-            filteredBooks = books.shuffled().dropLast(3)
+            filteredBooks = books.shuffled()
         }
         
         bookTableView.reloadData()
     }
 }
 
-extension SearchViewController: UITableViewDataSource {
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredBooks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let originalImage = UIImage(named: filteredBooks[indexPath.row].title)
-        let thumbnailImage = originalImage?.preparingThumbnail(of: CGSize(width: 40, height: 60))
+        let cell = tableView.dequeueReusableCell(withIdentifier: ExploreTableViewCell.identifier, for: indexPath) as! ExploreTableViewCell
         
-        var configuration = cell.defaultContentConfiguration()
-        configuration.text = filteredBooks[indexPath.row].title
-        configuration.image = thumbnailImage
-        configuration.secondaryText = "\(filteredBooks[indexPath.row].score)점"
-        
-        cell.contentConfiguration = configuration
+        cell.update(with: filteredBooks[indexPath.row])
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        let detailVC = storyboard?.instantiateViewController(withIdentifier: DetailViewController.identifier) as! DetailViewController
+        
+        detailVC.book = filteredBooks[indexPath.item]
+        
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }

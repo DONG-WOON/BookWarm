@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		722A75622A7A312200DB340E /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722A75612A7A312200DB340E /* ExploreViewController.swift */; };
+		722A75682A7A393C00DB340E /* ExploreHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722A75662A7A393C00DB340E /* ExploreHeaderCollectionViewCell.swift */; };
+		722A75692A7A393C00DB340E /* ExploreHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 722A75672A7A393C00DB340E /* ExploreHeaderCollectionViewCell.xib */; };
+		722A75722A7A44E900DB340E /* ExploreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722A75702A7A44E900DB340E /* ExploreTableViewCell.swift */; };
+		722A75732A7A44E900DB340E /* ExploreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 722A75712A7A44E900DB340E /* ExploreTableViewCell.xib */; };
+		722A75752A7A4CBA00DB340E /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722A75742A7A4CBA00DB340E /* Extension+UIViewController.swift */; };
 		722BBB1C2A78A1F800E6AC90 /* Extension+UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BBB1B2A78A1F800E6AC90 /* Extension+UICollectionViewFlowLayout.swift */; };
 		72ABE29C2A779A3600FDE2A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ABE29B2A779A3600FDE2A2 /* AppDelegate.swift */; };
 		72ABE29E2A779A3600FDE2A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ABE29D2A779A3600FDE2A2 /* SceneDelegate.swift */; };
@@ -24,6 +30,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		722A75612A7A312200DB340E /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		722A75662A7A393C00DB340E /* ExploreHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		722A75672A7A393C00DB340E /* ExploreHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		722A75702A7A44E900DB340E /* ExploreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTableViewCell.swift; sourceTree = "<group>"; };
+		722A75712A7A44E900DB340E /* ExploreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreTableViewCell.xib; sourceTree = "<group>"; };
+		722A75742A7A4CBA00DB340E /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		722BBB1B2A78A1F800E6AC90 /* Extension+UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionViewFlowLayout.swift"; sourceTree = "<group>"; };
 		72ABE2982A779A3600FDE2A2 /* BookWarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookWarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72ABE29B2A779A3600FDE2A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,11 +65,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		722A75632A7A312900DB340E /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				722A75612A7A312200DB340E /* ExploreViewController.swift */,
+				722A75662A7A393C00DB340E /* ExploreHeaderCollectionViewCell.swift */,
+				722A75672A7A393C00DB340E /* ExploreHeaderCollectionViewCell.xib */,
+				722A75702A7A44E900DB340E /* ExploreTableViewCell.swift */,
+				722A75712A7A44E900DB340E /* ExploreTableViewCell.xib */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
 		722BBB592A78EC3F00E6AC90 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				72ABE2B52A779E5000FDE2A2 /* Extension+UIView.swift */,
 				72ABE2B72A779F2400FDE2A2 /* Extension+UIColor.swift */,
+				722A75742A7A4CBA00DB340E /* Extension+UIViewController.swift */,
 				722BBB1B2A78A1F800E6AC90 /* Extension+UICollectionViewFlowLayout.swift */,
 			);
 			path = Extension;
@@ -122,6 +147,7 @@
 				722BBB5A2A78EC5C00E6AC90 /* Main */,
 				722BBB5C2A78EC7E00E6AC90 /* Detail */,
 				722BBB5D2A78EC8E00E6AC90 /* Search */,
+				722A75632A7A312900DB340E /* Explore */,
 				722BBB592A78EC3F00E6AC90 /* Extension */,
 				72ABE2A12A779A3600FDE2A2 /* Main.storyboard */,
 				72ABE2A42A779A3700FDE2A2 /* Assets.xcassets */,
@@ -189,8 +215,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				722A75692A7A393C00DB340E /* ExploreHeaderCollectionViewCell.xib in Resources */,
 				72ABE2A82A779A3700FDE2A2 /* LaunchScreen.storyboard in Resources */,
 				72ABE2A52A779A3700FDE2A2 /* Assets.xcassets in Resources */,
+				722A75732A7A44E900DB340E /* ExploreTableViewCell.xib in Resources */,
 				72ABE2A32A779A3600FDE2A2 /* Main.storyboard in Resources */,
 				72ABE2B22A779AD800FDE2A2 /* MainCollectionViewCell.xib in Resources */,
 			);
@@ -208,11 +236,15 @@
 				72ABE2A02A779A3600FDE2A2 /* MainViewController.swift in Sources */,
 				72ABE29C2A779A3600FDE2A2 /* AppDelegate.swift in Sources */,
 				72ABE2BA2A77A54D00FDE2A2 /* SearchViewController.swift in Sources */,
+				722A75722A7A44E900DB340E /* ExploreTableViewCell.swift in Sources */,
 				72ABE2B82A779F2400FDE2A2 /* Extension+UIColor.swift in Sources */,
 				72ABE2B62A779E5000FDE2A2 /* Extension+UIView.swift in Sources */,
+				722A75752A7A4CBA00DB340E /* Extension+UIViewController.swift in Sources */,
 				72ABE29E2A779A3600FDE2A2 /* SceneDelegate.swift in Sources */,
 				72ABE2B12A779AD800FDE2A2 /* MainCollectionViewCell.swift in Sources */,
+				722A75622A7A312200DB340E /* ExploreViewController.swift in Sources */,
 				72ABE2B42A779C9600FDE2A2 /* Book.swift in Sources */,
+				722A75682A7A393C00DB340E /* ExploreHeaderCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

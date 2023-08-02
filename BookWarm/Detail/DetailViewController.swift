@@ -9,7 +9,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    var book: Book = Book(title: String(), overview: String(), score: 0)
+    var book: Book = Book()
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var coverImageView: UIImageView!
@@ -37,7 +37,7 @@ class DetailViewController: UIViewController {
     private func update(with book: Book) {
         titleLabel.text = book.title
         coverImageView.image = UIImage(named: book.title)
-        rankLabel.text = "평균★\(book.score)점"
+        rankLabel.text = "평균★\(book.rate)점"
         overViewLabel.text = book.overview
     }
 }

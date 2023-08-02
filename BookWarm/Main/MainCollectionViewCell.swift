@@ -8,8 +8,6 @@
 import UIKit
 
 class MainCollectionViewCell: UICollectionViewCell {
-    
-    static let identifier = String(describing: MainCollectionViewCell.self)
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -35,7 +33,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     func update(with book: Book) {
         titleLabel.text = book.title
-        scoreLabel.text = "\(book.score)"
+        scoreLabel.text = "\(book.rate)"
         coverImageView.image = UIImage(named: book.title)
         
         let heartImage = book.isFavorite ? UIImage(systemName: "heart.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal) : UIImage(systemName: "heart")
