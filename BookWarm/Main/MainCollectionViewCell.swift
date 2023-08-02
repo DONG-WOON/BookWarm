@@ -12,27 +12,34 @@ class MainCollectionViewCell: UICollectionViewCell {
     static let identifier = String(describing: MainCollectionViewCell.self)
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var rateLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         titleLabel.font = .boldSystemFont(ofSize: 18)
         titleLabel.textColor = .white
-        rateLabel.font = .systemFont(ofSize: 12)
-        rateLabel.textColor = .white
+        scoreLabel.font = .systemFont(ofSize: 12)
+        scoreLabel.textColor = .white
+        favoriteButton.tintColor = .black
     }
 
     override func prepareForReuse() {
         titleLabel.text = nil
-        rateLabel.text = nil
+        scoreLabel.text = nil
         coverImageView.image = nil
+        favoriteButton.imageView?.image = UIImage(systemName: "heart")
     }
     
     func update(with book: Book) {
         titleLabel.text = book.title
-        rateLabel.text = "\(book.rate)"
+        scoreLabel.text = "\(book.score)"
         coverImageView.image = UIImage(named: book.title)
+        
+        let heartImage = book.isFavorite ? UIImage(systemName: "heart.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal) : UIImage(systemName: "heart")
+        
+        favoriteButton.setImage(heartImage, for: .normal)
     }
 }

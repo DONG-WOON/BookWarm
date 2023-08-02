@@ -9,7 +9,11 @@ import UIKit
 
 class MainViewController: UICollectionViewController {
     
-    var bookList = books
+    var bookList = books {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,8 +21,17 @@ class MainViewController: UICollectionViewController {
         let nib = UINib(nibName: MainCollectionViewCell.identifier, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
         
-        collectionView.collectionViewLayout = DefaultCollectionViewFlowLayout()
+        let flowLayout = UICollectionViewFlowLayout()
+        let spacing: CGFloat = 10.0
+        let deviceWidth = UIScreen.main.bounds.width
+        
+        lazy var itemWidth = (deviceWidth - (spacing * 3)) / 2
+        flowLayout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+        
+        collectionView.collectionViewLayout = flowLayout
     }
+    
     @IBAction func serchBarButtonDidTapped(_ sender: UIBarButtonItem) {
         let searchVC = storyboard?.instantiateViewController(withIdentifier: String(describing: SearchViewController.self)) as! SearchViewController
         let navigationController = UINavigationController(rootViewController: searchVC)
@@ -35,6 +48,12 @@ class MainViewController: UICollectionViewController {
         present(navigationController, animated: true)
     }
     
+    @objc
+    func favoriteButtonDidTapped(_ sender: UIButton) {
+        let index = sender.tag
+        bookList[index].isFavorite.toggle()
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return bookList.count
     }
@@ -45,6 +64,8 @@ class MainViewController: UICollectionViewController {
         cell.backgroundColor = .random()
         cell.rounded(cornerRadius: 10, isShadowBackground: true)
         cell.update(with: bookList[indexPath.item])
+        cell.favoriteButton.tag = indexPath.item
+        cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonDidTapped), for: .touchUpInside)
         
         return cell
     }

@@ -9,55 +9,35 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet var starCollection: [UIImageView]!
-    @IBOutlet weak var coverImageView: UIImageView!
-    @IBOutlet weak var overViewTextView: UITextView!
+    var book: Book = Book(title: String(), overview: String(), score: 0)
     
-    var book: Book = Book(title: String(), overview: String(), rate: 0)
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet weak var writerLabel: UILabel!
+    @IBOutlet weak var bottomBackgroundView: UIView!
+    @IBOutlet weak var rankLabel: UILabel!
+    @IBOutlet weak var overViewLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-    }
-    
-    ///prepareForReuse
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
+        bottomBackgroundView.layer.cornerRadius = 10
+        bottomBackgroundView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
         update(with: book)
     }
     
+    ///prepareForReuse
+    
     override class func awakeFromNib() {
         super.awakeFromNib()
-        
+        print("🔥 ",#function)
     }
     
     private func update(with book: Book) {
-        self.titleLabel.text = book.title
-        self.overViewTextView.text = book.overview
-        self.coverImageView.image = UIImage(named: book.title)
-        
-        let oneAndHalfStarsCount = countingStar(with: book.rate)
-        (0...oneAndHalfStarsCount.one - 1).forEach { i in
-            starCollection[i].image = UIImage(systemName: "star.fill")
-        }
-        
-        let halfStarIndex = oneAndHalfStarsCount.one
-        let halfStarCount = oneAndHalfStarsCount.half
-        starCollection[halfStarIndex].image = halfStarCount == 1 ? UIImage(systemName: "star.fill.left") : UIImage(systemName: "star")
-    }
-    
-    typealias Stars = (one: Int, half: Int)
-    
-    func countingStar(with rate: Double) -> Stars {
-        let roundedRate = rate.rounded()
-        let count = Int(roundedRate / 2)
-        if Int(roundedRate) % 2 == 1 {
-            return Stars(one: count, half: 1)
-        } else {
-            return Stars(one: count, half: 0)
-        }
+        titleLabel.text = book.title
+        coverImageView.image = UIImage(named: book.title)
+        rankLabel.text = "평균★\(book.score)점"
+        overViewLabel.text = book.overview
     }
 }

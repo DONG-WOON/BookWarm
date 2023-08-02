@@ -26,11 +26,11 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
             filteredBooks = books.filter { $0.title.contains(searchText) }
-            bookTableView.reloadData()
         } else {
             filteredBooks = books.shuffled().dropLast(3)
-            bookTableView.reloadData()
         }
+        
+        bookTableView.reloadData()
     }
 }
 
@@ -42,11 +42,13 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let originalImage = UIImage(named: filteredBooks[indexPath.row].title)
+        let thumbnailImage = originalImage?.preparingThumbnail(of: CGSize(width: 40, height: 60))
         
         var configuration = cell.defaultContentConfiguration()
         configuration.text = filteredBooks[indexPath.row].title
-        configuration.image = UIImage(named: filteredBooks[indexPath.row].title)?.preparingThumbnail(of: CGSize(width: 40, height: 60))
-        configuration.secondaryText = "\(filteredBooks[indexPath.row].rate)점"
+        configuration.image = thumbnailImage
+        configuration.secondaryText = "\(filteredBooks[indexPath.row].score)점"
         
         cell.contentConfiguration = configuration
         

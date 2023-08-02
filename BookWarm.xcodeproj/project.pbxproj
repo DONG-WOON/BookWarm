@@ -69,7 +69,6 @@
 				72ABE29F2A779A3600FDE2A2 /* MainViewController.swift */,
 				72ABE2AF2A779AD800FDE2A2 /* MainCollectionViewCell.swift */,
 				72ABE2B02A779AD800FDE2A2 /* MainCollectionViewCell.xib */,
-				72ABE2A12A779A3600FDE2A2 /* Main.storyboard */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -124,6 +123,7 @@
 				722BBB5C2A78EC7E00E6AC90 /* Detail */,
 				722BBB5D2A78EC8E00E6AC90 /* Search */,
 				722BBB592A78EC3F00E6AC90 /* Extension */,
+				72ABE2A12A779A3600FDE2A2 /* Main.storyboard */,
 				72ABE2A42A779A3700FDE2A2 /* Assets.xcassets */,
 				72ABE2A62A779A3700FDE2A2 /* LaunchScreen.storyboard */,
 				72ABE2A92A779A3700FDE2A2 /* Info.plist */,
