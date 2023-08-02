@@ -12,6 +12,17 @@ struct Book {
     let overview: String
     let score: Double
     var isFavorite = false
+    let backgroundColor = Color(red: .random(in: 0...1),
+                                green: .random(in: 0...1),
+                                blue: .random(in: 0...1),
+                                alpha: 0.7)
+}
+
+struct Color {
+    let red: CGFloat
+    let green: CGFloat
+    let blue: CGFloat
+    let alpha: CGFloat
 }
 
 let books: [Book] = [

@@ -52,10 +52,12 @@ class MainViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier, for: indexPath) as? MainCollectionViewCell else { return UICollectionViewCell() }
+        let book = bookList[indexPath.item]
         
-        cell.backgroundColor = .random()
+        // 셀의 컬러를 book의 내부에서 갖고 있는게 옳바른 방식인가?
+        cell.backgroundColor = .getColor(rgb: book.backgroundColor)
         cell.rounded(cornerRadius: 10, isShadowBackground: true)
-        cell.update(with: bookList[indexPath.item])
+        cell.update(with: book)
         cell.favoriteButton.tag = indexPath.item
         cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonDidTapped), for: .touchUpInside)
         

@@ -8,12 +8,12 @@
 import UIKit
 
 extension UIColor {
-    static func random() -> UIColor {
+    static func getColor(rgb: Color) -> UIColor {
         return UIColor(
-            red:   .random(in: 0...1),
-            green: .random(in: 0...1),
-            blue:  .random(in: 0...1),
-            alpha: 0.7
+            red:   rgb.red,
+            green: rgb.green,
+            blue:  rgb.blue,
+            alpha: rgb.alpha
         )
     }
 }
