@@ -21,15 +21,7 @@ class MainViewController: UICollectionViewController {
         let nib = UINib(nibName: MainCollectionViewCell.identifier, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
         
-        let flowLayout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 10.0
-        let deviceWidth = UIScreen.main.bounds.width
-        
-        lazy var itemWidth = (deviceWidth - (spacing * 3)) / 2
-        flowLayout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth)
-        
-        collectionView.collectionViewLayout = flowLayout
+        collectionView.collectionViewLayout = DefaultCollectionViewFlowLayout(cellCount: 2)
     }
     
     @IBAction func serchBarButtonDidTapped(_ sender: UIBarButtonItem) {

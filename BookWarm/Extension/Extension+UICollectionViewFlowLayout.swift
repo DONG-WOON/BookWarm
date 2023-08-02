@@ -20,11 +20,8 @@ class DefaultCollectionViewFlowLayout: UICollectionViewFlowLayout {
         self.itemSize = CGSize(width: itemWidth, height: itemWidth)
     }
     
-    convenience override init() {
-        self.init()
-        
-        self.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        self.itemSize = CGSize(width: itemWidth, height: itemWidth)
+    convenience init(cellCount: Int) {
+        self.init(spacing: 10, cellCount: cellCount)
     }
     
     required init?(coder: NSCoder) {
