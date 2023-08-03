@@ -77,12 +77,6 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         nav.modalPresentationStyle = .fullScreen
         
-        let dismissAction = UIAction(image: UIImage(systemName: "xmark")) { _ in
-            self.dismiss(animated: true)
-        }
-        
-        detailVC.navigationItem.leftBarButtonItem = UIBarButtonItem(primaryAction: dismissAction)
-        
         detailVC.book = books[indexPath.row]
         
         present(nav, animated: true)
@@ -111,12 +105,6 @@ extension ExploreViewController:  UITableViewDataSource, UITableViewDelegate {
         let nav = UINavigationController(rootViewController: detailVC)
         
         nav.modalPresentationStyle = .fullScreen
-        
-        let dismissAction = UIAction(image: UIImage(systemName: "xmark")) { _ in
-            self.dismiss(animated: true)
-        }
-        
-        detailVC.navigationItem.leftBarButtonItem = UIBarButtonItem(primaryAction: dismissAction)
         
         detailVC.book = books[indexPath.row]
         

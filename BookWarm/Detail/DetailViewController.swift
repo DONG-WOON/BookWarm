@@ -7,9 +7,18 @@
 
 import UIKit
 
+enum TransitionType {
+    case push
+    case present
+}
+
 class DetailViewController: UIViewController {
     
     var book: Book = Book()
+    var transitionType: TransitionType = .push
+    lazy var dismissAction = UIAction(image: UIImage(systemName: "xmark")) { _ in
+        self.dismiss(animated: true)
+    }
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var coverImageView: UIImageView!
@@ -20,6 +29,13 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        switch transitionType {
+        case .push:
+            break
+        case .present:
+            navigationItem.leftBarButtonItem = UIBarButtonItem(primaryAction: dismissAction)
+        }
         
         bottomBackgroundView.layer.cornerRadius = 10
         bottomBackgroundView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]

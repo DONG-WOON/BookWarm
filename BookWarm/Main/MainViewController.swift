@@ -38,22 +38,6 @@ class MainViewController: UICollectionViewController {
         collectionView.collectionViewLayout = DefaultCollectionViewFlowLayout(cellCount: 2)
     }
     
-    @IBAction func serchBarButtonDidTapped(_ sender: UIBarButtonItem) {
-        let searchVC = storyboard?.instantiateViewController(withIdentifier: String(describing: SearchViewController.self)) as! SearchViewController
-        let navigationController = UINavigationController(rootViewController: searchVC)
-        
-        navigationController.modalPresentationStyle = .fullScreen
-        
-        let dismissAction = UIAction { _ in
-            self.dismiss(animated: true)
-        }
-        
-        searchVC.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), primaryAction: dismissAction)
-        searchVC.title = "검색 화면"
-        
-        present(navigationController, animated: true)
-    }
-    
     @objc func favoriteButtonDidTapped(_ sender: UIButton) {
         let index = sender.tag
         filteredBooks[index].isFavorite.toggle()
@@ -83,6 +67,7 @@ extension MainViewController {
         let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
         
         detailVC.book = filteredBooks[indexPath.item]
+        detailVC.transitionType = .push
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
