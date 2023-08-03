@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--나의 책장-->
+        <!--Main View Controller-->
         <scene sceneID="gsJ-HH-Xwh">
             <objects>
                 <collectionViewController id="Hpz-wI-jwo" customClass="MainViewController" customModule="BookWarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,14 +38,7 @@
                             <outlet property="delegate" destination="Hpz-wI-jwo" id="NMd-1I-Gyy"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="나의 책장" id="Ufa-xA-w44">
-                        <barButtonItem key="rightBarButtonItem" image="magnifyingglass" catalog="system" id="btN-Ne-7gT">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="serchBarButtonDidTapped:" destination="Hpz-wI-jwo" id="caT-R3-q2h"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Ufa-xA-w44"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lkO-It-Rfj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -353,7 +346,6 @@
     <resources>
         <image name="books.vertical.fill" catalog="system" width="128" height="110"/>
         <image name="eyeglasses" catalog="system" width="128" height="55"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

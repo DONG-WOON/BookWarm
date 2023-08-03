@@ -31,7 +31,7 @@ class DetailViewController: UIViewController {
     
     override class func awakeFromNib() {
         super.awakeFromNib()
-        print("🔥 ",#function)
+        
     }
     
     private func update(with book: Book) {

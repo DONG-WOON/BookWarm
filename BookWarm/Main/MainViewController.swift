@@ -9,15 +9,29 @@ import UIKit
 
 class MainViewController: UICollectionViewController {
     
-    var bookList = books {
+    lazy var filteredBooks: [Book] = books {
         didSet {
             collectionView.reloadData()
         }
     }
-
+    
+    let searchBar = UISearchBar()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configureSearchBar()
+        configureCollectionView()
+    }
+    
+    func configureSearchBar() {
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
+        searchBar.placeholder = "도서 검색"
+        
+        navigationItem.titleView = searchBar
+    }
+    func configureCollectionView() {
         let nib = UINib(nibName: MainCollectionViewCell.identifier, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
         
@@ -33,26 +47,27 @@ class MainViewController: UICollectionViewController {
         let dismissAction = UIAction { _ in
             self.dismiss(animated: true)
         }
-
+        
         searchVC.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), primaryAction: dismissAction)
         searchVC.title = "검색 화면"
         
         present(navigationController, animated: true)
     }
     
-    @objc
-    func favoriteButtonDidTapped(_ sender: UIButton) {
+    @objc func favoriteButtonDidTapped(_ sender: UIButton) {
         let index = sender.tag
-        bookList[index].isFavorite.toggle()
+        filteredBooks[index].isFavorite.toggle()
     }
-    
+}
+
+extension MainViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return bookList.count
+        return filteredBooks.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier, for: indexPath) as? MainCollectionViewCell else { return UICollectionViewCell() }
-        let book = bookList[indexPath.item]
+        let book = filteredBooks[indexPath.item]
         
         // 셀의 컬러를 book의 내부에서 갖고 있는게 옳바른 방식인가?
         cell.backgroundColor = .getColor(rgb: book.backgroundColor)
@@ -67,8 +82,20 @@ class MainViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
         
-        detailVC.book = bookList[indexPath.item]
+        detailVC.book = filteredBooks[indexPath.item]
         
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+
+
+extension MainViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if !searchText.isEmpty {
+            filteredBooks = books.filter { $0.title.contains(searchText) }
+        } else {
+            filteredBooks = books
+        }
     }
 }
