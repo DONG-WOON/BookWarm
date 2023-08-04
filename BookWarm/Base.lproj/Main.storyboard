@@ -152,26 +152,53 @@
                                             <constraint firstAttribute="height" constant="0.5" id="DBy-0P-mbJ"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bms-3l-sJX">
-                                        <rect key="frame" x="20" y="81.333333333333343" width="353" height="18"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JDL-Cd-oSX">
+                                        <rect key="frame" x="20" y="341.33333333333337" width="353" height="263"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVE-qT-GZU">
+                                        <rect key="frame" x="285" y="301.33333333333337" width="88" height="35"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="메모 수정">
+                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="memoButtonDidTapped:" destination="Ih5-JA-aI5" eventType="touchUpInside" id="rLg-kq-fX8"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="overView" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LP6-9p-gVb">
+                                        <rect key="frame" x="20" y="91.333333333333343" width="353" height="200.00000000000003"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="DCr-dH-TjE"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="bms-3l-sJX" firstAttribute="top" secondItem="g3e-0Q-cPc" secondAttribute="bottom" constant="10" id="3Y9-8t-tLo"/>
+                                    <constraint firstItem="kVE-qT-GZU" firstAttribute="trailing" secondItem="JDL-Cd-oSX" secondAttribute="trailing" id="3dF-yW-SxY"/>
+                                    <constraint firstItem="kVE-qT-GZU" firstAttribute="top" secondItem="LP6-9p-gVb" secondAttribute="bottom" constant="10" id="5Mi-8C-T7t"/>
                                     <constraint firstItem="r3w-u8-Je9" firstAttribute="leading" secondItem="q6g-PZ-Mbq" secondAttribute="leading" constant="20" id="J7E-ak-pYx"/>
                                     <constraint firstItem="g3e-0Q-cPc" firstAttribute="leading" secondItem="q6g-PZ-Mbq" secondAttribute="leading" constant="20" id="JFG-VF-IOs"/>
+                                    <constraint firstItem="LP6-9p-gVb" firstAttribute="leading" secondItem="q6g-PZ-Mbq" secondAttribute="leading" constant="20" id="M6S-lR-fG5"/>
                                     <constraint firstItem="g3e-0Q-cPc" firstAttribute="top" secondItem="cGD-dF-CU4" secondAttribute="bottom" constant="10" id="MBj-5c-jlo"/>
-                                    <constraint firstAttribute="trailing" secondItem="bms-3l-sJX" secondAttribute="trailing" constant="20" id="R3o-QE-cfi"/>
                                     <constraint firstItem="cGD-dF-CU4" firstAttribute="leading" secondItem="q6g-PZ-Mbq" secondAttribute="leading" constant="10" id="SqJ-0Y-TSN"/>
-                                    <constraint firstItem="bms-3l-sJX" firstAttribute="leading" secondItem="q6g-PZ-Mbq" secondAttribute="leading" constant="20" id="TGi-ZL-7MK"/>
                                     <constraint firstItem="r3w-u8-Je9" firstAttribute="top" secondItem="q6g-PZ-Mbq" secondAttribute="top" constant="10" id="VCW-Fz-Bru"/>
                                     <constraint firstItem="cGD-dF-CU4" firstAttribute="top" secondItem="r3w-u8-Je9" secondAttribute="bottom" constant="10" id="Vti-cq-ibK"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="bms-3l-sJX" secondAttribute="bottom" constant="30" id="aTU-iP-ksf"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="JDL-Cd-oSX" secondAttribute="bottom" id="ivI-AB-NfV"/>
+                                    <constraint firstItem="JDL-Cd-oSX" firstAttribute="top" secondItem="kVE-qT-GZU" secondAttribute="bottom" constant="5" id="j7F-KQ-C4r"/>
                                     <constraint firstAttribute="trailing" secondItem="cGD-dF-CU4" secondAttribute="trailing" constant="10" id="q2C-zB-fjN"/>
+                                    <constraint firstItem="LP6-9p-gVb" firstAttribute="top" secondItem="g3e-0Q-cPc" secondAttribute="bottom" constant="20" id="red-jZ-1RW"/>
+                                    <constraint firstAttribute="trailing" secondItem="JDL-Cd-oSX" secondAttribute="trailing" constant="20" id="wdh-rd-UQH"/>
+                                    <constraint firstItem="JDL-Cd-oSX" firstAttribute="leading" secondItem="q6g-PZ-Mbq" secondAttribute="leading" constant="20" id="yFr-Di-yju"/>
+                                    <constraint firstAttribute="trailing" secondItem="LP6-9p-gVb" secondAttribute="trailing" constant="20" id="z7O-eR-atX"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -195,7 +222,9 @@
                     <connections>
                         <outlet property="bottomBackgroundView" destination="q6g-PZ-Mbq" id="Yci-HL-I3u"/>
                         <outlet property="coverImageView" destination="cxC-5z-jid" id="K5s-BI-ULu"/>
-                        <outlet property="overViewLabel" destination="bms-3l-sJX" id="tVM-4w-ZEG"/>
+                        <outlet property="memoButton" destination="kVE-qT-GZU" id="Nvf-pJ-heB"/>
+                        <outlet property="memoTextView" destination="JDL-Cd-oSX" id="UQe-of-jw9"/>
+                        <outlet property="overViewTextView" destination="LP6-9p-gVb" id="oZc-Su-hUu"/>
                         <outlet property="rankLabel" destination="r3w-u8-Je9" id="uOO-jp-FUC"/>
                         <outlet property="titleLabel" destination="L5s-jm-UaU" id="foI-QJ-jus"/>
                         <outlet property="writerLabel" destination="lYv-Cy-JYo" id="G5v-ZN-z3D"/>
@@ -346,6 +375,9 @@
     <resources>
         <image name="books.vertical.fill" catalog="system" width="128" height="110"/>
         <image name="eyeglasses" catalog="system" width="128" height="55"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

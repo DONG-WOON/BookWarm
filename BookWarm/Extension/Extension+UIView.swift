@@ -22,4 +22,10 @@ extension UIView {
             self.layer.shadowOpacity = 0.5
         }
     }
+    
+    func bordered(cornerRadius: CGFloat = 5) {
+        self.layer.cornerRadius = cornerRadius
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.black.cgColor
+    }
 }

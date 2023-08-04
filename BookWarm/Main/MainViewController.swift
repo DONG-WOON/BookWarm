@@ -67,7 +67,7 @@ extension MainViewController {
         let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
         
         detailVC.book = filteredBooks[indexPath.item]
-        detailVC.transitionType = .push
+        detailVC.action = .edit
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
