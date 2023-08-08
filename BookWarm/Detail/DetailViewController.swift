@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 // domb: 텍스트 뷰 키보드 레이아웃 설정 ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
 
@@ -95,7 +96,11 @@ final class DetailViewController: UIViewController {
     
     private func update(with book: Book) {
         titleLabel.text = book.title
-        coverImageView.image = UIImage(named: book.title)
+        if UIImage(named: book.title) != nil {
+            coverImageView.image = UIImage(named: book.title)
+        } else {
+            coverImageView.kf.setImage(with: URL(string: book.thumbnailURL ?? ""))
+        }
         rankLabel.text = "평균★\(book.rate)점"
         overViewTextView.text = book.overview
     }

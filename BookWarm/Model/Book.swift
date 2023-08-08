@@ -14,18 +14,20 @@ struct Book {
     let overview: String
     let rate: Double
     var isFavorite: Bool
+    let thumbnailURL: String?
     let backgroundColor = Color(red: .random(in: 0...1),
                                 green: .random(in: 0...1),
                                 blue: .random(in: 0...1),
                                 alpha: 0.7)
     
-    init(title: String = String(), releaseDate: String = String(), runtime: Int = 0, overview: String = String(), rate: Double = 0, isFavorite: Bool = false) {
+    init(title: String = String(), releaseDate: String = String(), runtime: Int = 0, overview: String = String(), rate: Double = 0, isFavorite: Bool = false, thumbnailURL: String? = nil) {
         self.title = title
         self.releaseDate = releaseDate
         self.runtime = runtime
         self.overview = overview
         self.rate = rate
         self.isFavorite = isFavorite
+        self.thumbnailURL = thumbnailURL
     }
 }
 

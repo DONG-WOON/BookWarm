@@ -44,7 +44,7 @@
             </objects>
             <point key="canvasLocation" x="2848.0916030534349" y="-33.098591549295776"/>
         </scene>
-        <!--Search View Controller-->
+        <!--도서 검색-->
         <scene sceneID="Y5P-o2-c8Y">
             <objects>
                 <viewController storyboardIdentifier="SearchViewController" id="cs7-gP-UyT" customClass="SearchViewController" customModule="BookWarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -60,7 +60,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6vQ-vM-KET">
-                                <rect key="frame" x="0.0" y="115" width="393" height="703"/>
+                                <rect key="frame" x="0.0" y="115" width="393" height="654"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="5PA-ZQ-JeD" style="IBUITableViewCellStyleDefault" id="GwU-Jt-exd">
@@ -95,6 +95,7 @@
                             <constraint firstItem="RE0-m6-kgG" firstAttribute="trailing" secondItem="6vQ-vM-KET" secondAttribute="trailing" id="f03-DA-OF6"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="도서 검색" image="magnifyingglass" catalog="system" id="WHn-m2-e28"/>
                     <connections>
                         <outlet property="bookSearchBar" destination="TnW-iq-3y4" id="wEF-ld-5cw"/>
                         <outlet property="bookTableView" destination="6vQ-vM-KET" id="uxC-xy-0L4"/>
@@ -102,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uet-Qm-2UQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3628.2442748091603" y="-37.323943661971832"/>
+            <point key="canvasLocation" x="1920" y="1388"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="JUO-2D-Irr">
@@ -365,6 +366,7 @@
                     <connections>
                         <segue destination="VTD-Kx-auC" kind="relationship" relationship="viewControllers" id="4bq-eS-hzf"/>
                         <segue destination="mMZ-rl-AGY" kind="relationship" relationship="viewControllers" id="5P1-sc-bXb"/>
+                        <segue destination="cs7-gP-UyT" kind="relationship" relationship="viewControllers" id="OAY-kD-dG9"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aeQ-bP-X5P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -375,6 +377,7 @@
     <resources>
         <image name="books.vertical.fill" catalog="system" width="128" height="110"/>
         <image name="eyeglasses" catalog="system" width="128" height="55"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

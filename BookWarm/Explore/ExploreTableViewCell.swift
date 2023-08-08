@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ExploreTableViewCell: UITableViewCell {
     
@@ -24,9 +25,13 @@ class ExploreTableViewCell: UITableViewCell {
     }
     
     func update(with book: Book) {
-        coverImageView.image = UIImage(named: book.title)
+        if UIImage(named: book.title) != nil {
+            coverImageView.image = UIImage(named: book.title)
+        } else {
+            coverImageView.kf.setImage(with: URL(string: book.thumbnailURL ?? ""))
+        }
         titleLabel.text = book.title
-        infoLabel.text = book.releaseDate + "∙영화"
+        infoLabel.text = book.releaseDate + "∙책"
         
     }
 }
