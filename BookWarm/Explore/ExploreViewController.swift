@@ -8,6 +8,8 @@
 import UIKit
 
 class ExploreViewController: UIViewController {
+    
+    private var books: [Book] = bookSampleList
 
     @IBOutlet weak var exploreBooksTableView: UITableView!
     @IBOutlet weak var recentlyReadBooksCollectionView: UICollectionView!

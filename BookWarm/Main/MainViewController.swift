@@ -9,7 +9,8 @@ import UIKit
 
 class MainViewController: UICollectionViewController {
     
-    lazy var filteredBooks: [Book] = books {
+    private var myBooks: [Book] = []
+    private lazy var filteredBooks: [Book] = [] {
         didSet {
             collectionView.reloadData()
         }
@@ -20,29 +21,24 @@ class MainViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadMyBookData()
         configureSearchBar()
         configureCollectionView()
     }
     
-    func configureSearchBar() {
-        searchBar.delegate = self
-        searchBar.showsCancelButton = true
-        searchBar.placeholder = "도서 검색"
-        
-        navigationItem.titleView = searchBar
-    }
-    func configureCollectionView() {
-        let nib = UINib(nibName: MainCollectionViewCell.identifier, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
-        
-        collectionView.collectionViewLayout = DefaultCollectionViewFlowLayout(cellCount: 2)
-    }
+    
     
     @objc func favoriteButtonDidTapped(_ sender: UIButton) {
         let index = sender.tag
         filteredBooks[index].isFavorite.toggle()
     }
+    
+    private func loadMyBookData() {
+        // 추후 구현과제 - 내가 저장한 책 불러오기
+    }
 }
+
+// MARK: - CollectionView
 
 extension MainViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -57,6 +53,7 @@ extension MainViewController {
         cell.backgroundColor = .getColor(rgb: book.backgroundColor)
         cell.rounded(cornerRadius: 10, isShadowBackground: true)
         cell.update(with: book)
+        
         cell.favoriteButton.tag = indexPath.item
         cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonDidTapped), for: .touchUpInside)
         
@@ -73,14 +70,33 @@ extension MainViewController {
     }
 }
 
+// MARK: - Search
 
 extension MainViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
-            filteredBooks = books.filter { $0.title.contains(searchText) }
+            filteredBooks = myBooks.filter { $0.title.contains(searchText) }
         } else {
-            filteredBooks = books
+            filteredBooks = myBooks
         }
+    }
+}
+
+// MARK: Configure UI
+
+extension MainViewController {
+    private func configureSearchBar() {
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
+        searchBar.placeholder = "도서 검색"
+        
+        navigationItem.titleView = searchBar
+    }
+    private func configureCollectionView() {
+        let nib = UINib(nibName: MainCollectionViewCell.identifier, bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
+        
+        collectionView.collectionViewLayout = DefaultCollectionViewFlowLayout(cellCount: 2)
     }
 }

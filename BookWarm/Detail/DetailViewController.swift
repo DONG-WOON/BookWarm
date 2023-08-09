@@ -55,6 +55,9 @@ final class DetailViewController: UIViewController {
         super.awakeFromNib()
     }
     
+    @IBAction func addMyBooks(_ sender: UIButton) {
+       // 추후 구현하기.
+    }
     
     @IBAction func memoButtonDidTapped(_ sender: UIButton) {
 

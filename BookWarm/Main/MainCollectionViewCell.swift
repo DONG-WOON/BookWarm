@@ -22,6 +22,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         scoreLabel.font = .systemFont(ofSize: 12)
         scoreLabel.textColor = .white
         favoriteButton.tintColor = .black
+        self.rounded(cornerRadius: 10, isShadowBackground: true)
     }
 
     override func prepareForReuse() {
@@ -35,6 +36,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         titleLabel.text = book.title
         scoreLabel.text = "\(book.rate)"
         coverImageView.image = UIImage(named: book.title)
+        backgroundColor = .getColor(rgb: book.backgroundColor)
         
         let heartImage = book.isFavorite ? UIImage(systemName: "heart.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal) : UIImage(systemName: "heart")
         
