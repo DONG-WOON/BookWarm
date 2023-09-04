@@ -7,6 +7,19 @@
 
 import Foundation
 
+struct Response: Codable {
+    var meta: Meta
+    var documents: [Book]
+}
+
+struct Meta: Codable {
+    var isEnd: Bool
+    
+    enum codingKeys: String, CodingKey {
+        case isEnd = "is_end"
+    }
+}
+
 struct Book: Codable {
     let title: String
     let releaseDate: String

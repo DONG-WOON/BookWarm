@@ -35,30 +35,11 @@ class SearchViewController: UIViewController {
     }
     
     private func searchBook(search: String, size: Int = 15, page: Int) {
-        let query = search.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        let url = "https://dapi.kakao.com/v3/search/book?query=\(query)&page=\(page)&size=\(size)"
-        let header: HTTPHeaders = ["Authorization": APIKey.kakao]
-        
-        AF.request(url, headers: header).validate().responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                self.isPageEnd  = json["meta"]["is_end"].boolValue
-               
-                let documents = json["documents"].arrayValue
-                let bookList = documents.map { book in
-                    let author = book["authors"].stringValue
-                    let contents = book["contents"].stringValue
-                    let thumbnailURL = book["thumbnail"].stringValue
-                    let title = book["title"].stringValue
-                    
-                    return Book(title: title, releaseDate: "", runtime: 0, overview: contents, rate: 0, isFavorite: false, thumbnailURL: thumbnailURL)
-                }
-                self.searchedBooks.append(contentsOf: bookList)
-                self.bookTableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
+        APIManager.shared.requestKakaoBookSearch(search: search, page: page) { books in
+            self.searchedBooks.append(contentsOf: books)
+            self.bookTableView.reloadData()
+        } onFailure: { error in
+            print(error)
         }
     }
 }
