@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UICollectionViewController {
     
@@ -14,12 +15,21 @@ class MainViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadMyBookData()
         configureCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadMyBookData()
+        tabBarController?.tabBar.isHidden = false
     }
    
     private func loadMyBookData() {
-        // 추후 구현과제 - 내가 저장한 책 불러오기
+        let realm = try! Realm()
+        let result = realm.objects(BookTable.self)
+        
+        myBooks = result.map { Book(table: $0) }
+        collectionView.reloadData()
     }
 }
 
@@ -34,11 +44,10 @@ extension MainViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier, for: indexPath) as? MainCollectionViewCell else { return UICollectionViewCell()
         }
         
-        let book = myBooks[indexPath.item]
-        cell.book = book
+        cell.update(book: myBooks[indexPath.item])
         
         cell.favoriteButtonAction = {
-            self.myBooks[indexPath.item].isFavorite.toggle()
+//            self.myBooks[indexPath.item].isFavorite.toggle()
         }
         
         return cell

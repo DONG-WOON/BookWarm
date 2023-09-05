@@ -16,8 +16,6 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     var favoriteButtonAction: () -> Void = { }
     
-    var book = Book()
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -29,8 +27,6 @@ class MainCollectionViewCell: UICollectionViewCell {
         self.rounded(cornerRadius: 10, isShadowBackground: true)
         
         favoriteButton.addTarget(self, action: #selector(favorite), for: .touchUpInside)
-        
-        update()
     }
 
     override func prepareForReuse() {
@@ -40,15 +36,15 @@ class MainCollectionViewCell: UICollectionViewCell {
         favoriteButton.imageView?.image = UIImage(systemName: "heart")
     }
     
-    func update() {
+    func update(book: Book) {
         titleLabel.text = book.title
-        scoreLabel.text = "\(book.rate)"
-        coverImageView.image = UIImage(named: book.title)
-        backgroundColor = .getColor(rgb: book.backgroundColor)
+//        scoreLabel.text = "\(book.rate ?? "")"
+        coverImageView.kf.setImage(with: URL(string: book.thumbnail ?? ""))
+        backgroundColor = .getColor(rgb: Color())
         
-        let heartImage = book.isFavorite ? UIImage(systemName: "heart.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal) : UIImage(systemName: "heart")
+//        let heartImage = book.isFavorite ? UIImage(systemName: "heart.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal) : UIImage(systemName: "heart")
         
-        favoriteButton.setImage(heartImage, for: .normal)
+//        favoriteButton.setImage(heartImage, for: .normal)
     }
     
     @objc func favorite() {

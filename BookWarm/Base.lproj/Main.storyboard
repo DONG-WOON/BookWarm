@@ -240,6 +240,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addMyBooksButton" destination="Rot-0B-JJQ" id="d0j-jJ-xwX"/>
                         <outlet property="bottomBackgroundView" destination="q6g-PZ-Mbq" id="Yci-HL-I3u"/>
                         <outlet property="coverImageView" destination="cxC-5z-jid" id="K5s-BI-ULu"/>
                         <outlet property="memoButton" destination="kVE-qT-GZU" id="Nvf-pJ-heB"/>

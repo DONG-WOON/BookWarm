@@ -9,7 +9,7 @@ import UIKit
 
 class ExploreViewController: UIViewController {
     
-    private var books: [Book] = bookSampleList
+    private var books: [Book] = []
 
     @IBOutlet weak var exploreBooksTableView: UITableView!
     @IBOutlet weak var recentlyReadBooksCollectionView: UICollectionView!
@@ -45,11 +45,12 @@ class ExploreViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 7
         let deviceWidth = UIScreen.main.bounds.width
+        let deviceHeight = UIScreen.main.bounds.height
         let cellWidth = (deviceWidth - (5 * spacing)) / 4
         
         flowLayout.scrollDirection = .horizontal
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        flowLayout.itemSize = CGSize(width: cellWidth, height: 6/4 * cellWidth)
+        flowLayout.itemSize = CGSize(width: cellWidth, height: deviceHeight / 5)
         flowLayout.minimumLineSpacing = spacing
         
         return flowLayout

@@ -25,13 +25,13 @@ class ExploreTableViewCell: UITableViewCell {
     }
     
     func update(with book: Book) {
-        if UIImage(named: book.title) != nil {
-            coverImageView.image = UIImage(named: book.title)
+        if book.thumbnail != nil {
+            coverImageView.kf.setImage(with: URL(string: book.thumbnail ?? ""))
         } else {
-            coverImageView.kf.setImage(with: URL(string: book.thumbnailURL ?? ""))
+            coverImageView.image = UIImage(named: "contents_noImage")
         }
         titleLabel.text = book.title
-        infoLabel.text = book.releaseDate + "∙책"
+        //        infoLabel.text = book.datetime + "∙책"
         
     }
 }

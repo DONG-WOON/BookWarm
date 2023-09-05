@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import RealmSwift
 
 // domb: 텍스트 뷰 키보드 레이아웃 설정 ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
 
@@ -39,6 +40,7 @@ final class DetailViewController: UIViewController {
     @IBOutlet weak var overViewTextView: UITextView!
     @IBOutlet weak var memoTextView: UITextView!
     @IBOutlet weak var memoButton: UIButton!
+    @IBOutlet weak var addMyBooksButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +51,8 @@ final class DetailViewController: UIViewController {
         configureMemoTextView()
         configureViews()
         update(with: book)
+        
+        tabBarController?.tabBar.isHidden = true
     }
     
     override class func awakeFromNib() {
@@ -56,7 +60,17 @@ final class DetailViewController: UIViewController {
     }
     
     @IBAction func addMyBooks(_ sender: UIButton) {
-       // 추후 구현하기.
+        let realm = try! Realm()
+        
+        let sameBook = realm.objects(BookTable.self).where { $0.isbn == book.isbn }
+        
+        if sameBook.count == 0 {
+            try! realm.write {
+                realm.add(BookTable(book: book))
+            }
+        }
+        
+        dismiss(animated: true)
     }
     
     @IBAction func memoButtonDidTapped(_ sender: UIButton) {
@@ -99,13 +113,11 @@ final class DetailViewController: UIViewController {
     
     private func update(with book: Book) {
         titleLabel.text = book.title
-        if UIImage(named: book.title) != nil {
-            coverImageView.image = UIImage(named: book.title)
-        } else {
-            coverImageView.kf.setImage(with: URL(string: book.thumbnailURL ?? ""))
-        }
-        rankLabel.text = "평균★\(book.rate)점"
+        coverImageView.kf.setImage(with: URL(string: book.thumbnail ?? ""))
+//        rankLabel.text = "평균★\(book.rate)점"
         overViewTextView.text = book.overview
+        
+        addMyBooksButton.isEnabled = true
     }
 }
 
@@ -136,5 +148,6 @@ extension DetailViewController {
         
         memoTextView.bordered()
         memoButton.bordered()
+        addMyBooksButton.isEnabled = false
     }
 }
