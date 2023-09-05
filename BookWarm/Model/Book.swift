@@ -33,7 +33,9 @@ struct Book: Codable {
     
     var background: Color?
     var isFavorite: Bool = false
-    
+    var id: String {
+        return isbn.split(separator: " ").joined()
+    }
     var info: String {
         guard let publisher, let price else {
             return ""

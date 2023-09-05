@@ -9,8 +9,6 @@ import UIKit
 import Kingfisher
 import RealmSwift
 
-// domb: 텍스트 뷰 키보드 레이아웃 설정 ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
-
 enum MemoAction {
     case read
     case edit
@@ -18,6 +16,7 @@ enum MemoAction {
 
 final class DetailViewController: UIViewController {
     
+    let realm = try! Realm()
     var book: Book = Book()
     var action: MemoAction = .read
     
@@ -46,7 +45,6 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         loadUserMemoData()
-        
         check(action)
         configureMemoTextView()
         configureViews()
@@ -61,19 +59,23 @@ final class DetailViewController: UIViewController {
     }
     
     @IBAction func addMyBooks(_ sender: UIButton) {
-        let realm = try! Realm()
         
         let sameBook = realm.objects(BookTable.self).where { $0.isbn == book.isbn }
-        
-        if sameBook.count == 0 {
-            try! realm.write {
-                realm.add(BookTable(book: book))
+        do {
+            try realm.write {
+                if sameBook.count == 0 {
+                    let bookTable = BookTable(book: book)
+                    realm.add(bookTable)
+                    try realm.saveImage(path: "\(book.id).jpeg", image: coverImageView.image)
+                } else {
+                    try realm.deleteImageFromDocument(fileName: "\(book.id).jpeg")
+                    realm.delete(sameBook)
+                }
             }
-        } else {
-            try! realm.write {
-                realm.delete(sameBook)
-            }
+        } catch {
+            showErrorMessage(message: error.localizedDescription)
         }
+        
         if navigationController != nil {
             navigationController?.popViewController(animated: true)
         } else {
@@ -133,9 +135,7 @@ final class DetailViewController: UIViewController {
     private func update(with book: Book) {
         titleLabel.text = book.title
         coverImageView.kf.setImage(with: URL(string: book.thumbnail ?? ""))
-//        rankLabel.text = "평균★\(book.rate)점"
         overViewTextView.text = book.overview
-        
         addMyBooksButton.isEnabled = true
     }
 }
