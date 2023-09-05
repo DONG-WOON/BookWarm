@@ -51,6 +51,7 @@ final class DetailViewController: UIViewController {
         configureMemoTextView()
         configureViews()
         update(with: book)
+        toggleAddMyBooksButton()
         
         tabBarController?.tabBar.isHidden = true
     }
@@ -68,9 +69,16 @@ final class DetailViewController: UIViewController {
             try! realm.write {
                 realm.add(BookTable(book: book))
             }
+        } else {
+            try! realm.write {
+                realm.delete(sameBook)
+            }
         }
-        
-        dismiss(animated: true)
+        if navigationController != nil {
+            navigationController?.popViewController(animated: true)
+        } else {
+            dismiss(animated: true)
+        }
     }
     
     @IBAction func memoButtonDidTapped(_ sender: UIButton) {
@@ -100,6 +108,17 @@ final class DetailViewController: UIViewController {
         guard let dic = UserDefaults.standard.dictionary(forKey: "myMemo") as? [String: String] else { return }
         let memo = dic[book.title]
         memoTextView.text = memo
+    }
+    
+    func toggleAddMyBooksButton() {
+        let realm = try! Realm()
+        
+        let sameBook = realm.objects(BookTable.self).where { $0.isbn == book.isbn }
+        if sameBook.count == 1 {
+            addMyBooksButton.setTitle("책장에서 제거", for: .normal)
+        } else {
+            addMyBooksButton.setTitle("책장에 추가", for: .normal)
+        }
     }
     
     private func check(_ action: MemoAction) {

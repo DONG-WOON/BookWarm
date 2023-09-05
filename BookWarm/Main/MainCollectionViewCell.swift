@@ -42,9 +42,9 @@ class MainCollectionViewCell: UICollectionViewCell {
         coverImageView.kf.setImage(with: URL(string: book.thumbnail ?? ""))
         backgroundColor = .getColor(rgb: Color())
         
-//        let heartImage = book.isFavorite ? UIImage(systemName: "heart.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal) : UIImage(systemName: "heart")
+        let heartImage = book.isFavorite ? UIImage(systemName: "heart.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal) : UIImage(systemName: "heart")
         
-//        favoriteButton.setImage(heartImage, for: .normal)
+        favoriteButton.setImage(heartImage, for: .normal)
     }
     
     @objc func favorite() {

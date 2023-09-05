@@ -30,19 +30,26 @@ struct Book: Codable {
     let salePrice: Int?
     let thumbnail: String?
     let title: String
-    let url: String?
     
     var background: Color?
+    var isFavorite: Bool = false
+    
+    var info: String {
+        guard let publisher, let price else {
+            return ""
+        }
+        return "출판사: \(publisher) | 가격: \(price)"
+    }
     
     enum CodingKeys: String, CodingKey {
         case authors
         case overview = "contents"
         case datetime, isbn, price, publisher
         case salePrice = "sale_price"
-        case thumbnail, title, url
+        case thumbnail, title
     }
     
-    internal init(authors: [String]? = nil, overview: String? = nil, datetime: String? = nil, isbn: String = String(), price: Int? = nil, publisher: String? = nil, salePrice: Int? = nil, thumbnail: String? = nil, title: String = String(), url: String? = nil, background: Color = Color()) {
+    internal init(authors: [String]? = nil, overview: String? = nil, datetime: String? = nil, isbn: String = String(), price: Int? = nil, publisher: String? = nil, salePrice: Int? = nil, thumbnail: String? = nil, title: String = String(), background: Color = Color(), isFavorite: Bool = false) {
         self.authors = authors
         self.overview = overview
         self.datetime = datetime
@@ -52,8 +59,8 @@ struct Book: Codable {
         self.salePrice = salePrice
         self.thumbnail = thumbnail
         self.title = title
-        self.url = url
         self.background = background
+        self.isFavorite = isFavorite
     }
     
     init(table: BookTable) {
@@ -66,8 +73,8 @@ struct Book: Codable {
         self.salePrice = nil
         self.thumbnail = table.thumbnailURL
         self.title = table.title
-        self.url = nil
         self.background = table.backgroundColorTable?.toColor()
+        self.isFavorite = table.isFavorite
     }
 }
 

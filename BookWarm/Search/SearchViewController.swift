@@ -7,13 +7,11 @@
 //
 import UIKit
 import Alamofire
-import SwiftyJSON
-
 
 class SearchViewController: UIViewController {
-    
-    @IBOutlet weak var bookSearchBar: UISearchBar!
-    @IBOutlet weak var bookTableView: UITableView!
+
+    let bookSearchBar = UISearchBar()
+    let bookTableView = UITableView()
     
     var searchedBooks: [Book] = []
     var searchText = String()
@@ -23,15 +21,11 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bookSearchBar.delegate = self
-        bookSearchBar.returnKeyType = .search
+        setTableView()
+        setSearchBar()
         
-        bookTableView.dataSource = self
-        bookTableView.delegate = self
-        bookTableView.prefetchDataSource = self
-        
-        let nib = UINib(nibName: ExploreTableViewCell.identifier, bundle: nil)
-        bookTableView.register(nib, forCellReuseIdentifier: ExploreTableViewCell.identifier)
+        configureViews()
+        setConstraints()
     }
     
     private func searchBook(search: String, size: Int = 15, page: Int) {
@@ -42,8 +36,24 @@ class SearchViewController: UIViewController {
                     self.bookTableView.reloadData()
                 }
             } onFailure: { error in
-                print(error)
+                self.showErrorMessage(message: error?.localizedDescription)
             }
+        }
+    }
+}
+
+extension SearchViewController {
+    func configureViews() {
+        view.addSubview(bookSearchBar)
+        view.addSubview(bookTableView)
+    }
+    func setConstraints() {
+        bookSearchBar.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        bookTableView.snp.makeConstraints { make in
+            make.top.equalTo(bookSearchBar.snp.bottom)
+            make.leading.trailing.bottom.equalTo(view.keyboardLayoutGuide)
         }
     }
 }
@@ -51,6 +61,11 @@ class SearchViewController: UIViewController {
 // MARK: - SearchBar
 
 extension SearchViewController: UISearchBarDelegate {
+    
+    func setSearchBar() {
+        bookSearchBar.delegate = self
+        bookSearchBar.returnKeyType = .search
+    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
@@ -75,12 +90,21 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func setTableView() {
+        bookTableView.rowHeight = UITableView.automaticDimension
+        bookTableView.dataSource = self
+        bookTableView.delegate = self
+        bookTableView.prefetchDataSource = self
+        
+        bookTableView.register(SearchViewCell.self, forCellReuseIdentifier: SearchViewCell.identifier)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchedBooks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ExploreTableViewCell.identifier, for: indexPath) as! ExploreTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchViewCell.identifier, for: indexPath) as! SearchViewCell
         
         cell.update(with: searchedBooks[indexPath.row])
         
@@ -89,7 +113,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.reloadRows(at: [indexPath], with: .automatic)
-        let detailVC = storyboard?.instantiateViewController(withIdentifier: DetailViewController.identifier) as! DetailViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: DetailViewController.identifier) as! DetailViewController
         
         detailVC.book = searchedBooks[indexPath.item]
         

@@ -8,12 +8,17 @@
 import UIKit
 import RealmSwift
 
-class MainViewController: UICollectionViewController {
+class MainViewController: UIViewController {
+    
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DefaultCollectionViewFlowLayout(cellCount: 2))
     
     private var myBooks: [Book] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureViews()
+        setConstraints()
         
         configureCollectionView()
     }
@@ -33,28 +38,42 @@ class MainViewController: UICollectionViewController {
     }
 }
 
+extension MainViewController {
+    func configureViews() {
+        view.addSubview(collectionView)
+    }
+    
+    func setConstraints() {
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+}
+
 // MARK: - CollectionView
 
-extension MainViewController {
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return myBooks.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier, for: indexPath) as? MainCollectionViewCell else { return UICollectionViewCell()
         }
         
         cell.update(book: myBooks[indexPath.item])
         
         cell.favoriteButtonAction = {
-//            self.myBooks[indexPath.item].isFavorite.toggle()
+            self.myBooks[indexPath.item].isFavorite.toggle()
+            collectionView.reloadItems(at: [indexPath])
         }
         
         return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
         
         detailVC.book = myBooks[indexPath.item]
         detailVC.action = .edit
@@ -71,6 +90,7 @@ extension MainViewController {
         let nib = UINib(nibName: MainCollectionViewCell.identifier, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
         
-        collectionView.collectionViewLayout = DefaultCollectionViewFlowLayout(cellCount: 2)
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
 }

@@ -1,14 +1,13 @@
 //
-//  ExploreTableViewCell.swift
+//  SearchViewCell.swift
 //  BookWarm
 //
-//  Created by 서동운 on 8/2/23.
+//  Created by 서동운 on 9/5/23.
 //
-
 import UIKit
 import Kingfisher
 
-final class ExploreTableViewCell: UITableViewCell {
+final class SearchViewCell: UITableViewCell {
     
     lazy var coverImageView: UIImageView = {
         let view = UIImageView()
@@ -41,12 +40,6 @@ final class ExploreTableViewCell: UITableViewCell {
         setConstraints()
     }
     
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//
-//        setConstraints()
-//    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -69,7 +62,8 @@ final class ExploreTableViewCell: UITableViewCell {
     
     func setConstraints() {
         coverImageView.snp.makeConstraints { make in
-            make.top.leading.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(10)
+            make.top.leading.bottom.equalTo(contentView).inset(10)
+            make.height.equalTo(100)
             make.width.equalTo(coverImageView.snp.height).multipliedBy(0.6)
         }
         
@@ -88,3 +82,4 @@ final class ExploreTableViewCell: UITableViewCell {
         }
     }
 }
+

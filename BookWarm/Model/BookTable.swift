@@ -16,7 +16,7 @@ class BookTable: Object {
     @Persisted var runtime: Int?
     @Persisted var overview: String?
     @Persisted var rate: Double?
-    @Persisted var isFavorite: Bool?
+    @Persisted var isFavorite: Bool
     @Persisted var thumbnailURL: String?
     @Persisted var backgroundColorTable: ColorTable?
     
@@ -29,8 +29,9 @@ class BookTable: Object {
         self.runtime = nil
         self.overview = book.overview
         self.rate = nil
-        self.isFavorite = nil
+        self.isFavorite = book.isFavorite
         self.thumbnailURL = book.thumbnail
+        self.isFavorite = book.isFavorite
         self.backgroundColorTable = book.background?.toColorTable()
     }
 }
