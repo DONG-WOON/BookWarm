@@ -52,7 +52,7 @@ struct Book: Codable {
         case thumbnail, title
     }
     
-    internal init(authors: [String]? = nil, overview: String? = nil, datetime: String? = nil, isbn: String = String(), price: Int? = nil, publisher: String? = nil, salePrice: Int? = nil, thumbnail: String? = nil, title: String = String(), background: Color = Color(), isFavorite: Bool = false, memo: String? = nil) {
+    internal init(authors: [String]? = nil, overview: String? = nil, datetime: String? = nil, isbn: String = String(), price: Int? = nil, publisher: String? = nil, salePrice: Int? = nil, thumbnail: String? = nil, title: String = String(), background: Color? = nil, isFavorite: Bool = false, memo: String? = nil) {
         self.authors = authors
         self.overview = overview
         self.datetime = datetime
@@ -77,7 +77,7 @@ struct Book: Codable {
         self.salePrice = nil
         self.thumbnail = table.thumbnailURL
         self.title = table.title
-        self.background = table.backgroundColorTable?.toColor()
+        self.background = table.backgroundColorTable != nil ? table.backgroundColorTable?.toColor() : Color()
         self.isFavorite = table.isFavorite
         self.memo = table.memo
     }

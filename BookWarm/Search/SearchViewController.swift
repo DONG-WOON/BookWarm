@@ -35,6 +35,7 @@ class SearchViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.searchedBooks.append(contentsOf: books)
                     self.bookTableView.reloadData()
+
                 }
             } onFailure: { error in
                 self.showErrorMessage(message: error?.localizedDescription)

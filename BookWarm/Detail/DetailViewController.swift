@@ -9,14 +9,14 @@ import UIKit
 import Kingfisher
 import RealmSwift
 
-enum MemoAction {
-    case read
-    case edit
-}
-
 final class DetailViewController: UIViewController {
     
-    let realm = try! Realm()
+    enum MemoAction {
+        case read
+        case edit
+    }
+    
+    let bookRepository = BookRepository()
     var book: Book = Book()
     var action: MemoAction = .read
     
@@ -40,7 +40,6 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadUserMemoData()
         check(action)
         configureMemoTextView()
         configureViews()
@@ -56,27 +55,20 @@ final class DetailViewController: UIViewController {
     
     @IBAction func addMyBooks(_ sender: UIButton) {
         
-        let sameBook = realm.objects(BookTable.self).where { $0.isbn == book.isbn }
+        let sameBook = bookRepository.fetchFilter { $0.isbn == book.isbn }
         do {
-            try realm.write {
-                if sameBook.count == 0 {
-                    let bookTable = BookTable(book: book)
-                    realm.add(bookTable)
-                    try realm.saveImage(path: "\(book.id).jpeg", image: coverImageView.image)
-                } else {
-                    try realm.deleteImageFromDocument(fileName: "\(book.id).jpeg")
-                    realm.delete(sameBook)
-                }
+            if sameBook.count == 0 {
+                try bookRepository.createItem(BookTable(book: book))
+                try bookRepository.saveImage(path: "\(book.id).jpeg", image: coverImageView.image)
+            } else {
+                bookRepository.deleteItem(sameBook)
+                try bookRepository.deleteImageFromDocument(fileName: "\(book.id).jpeg")
             }
         } catch {
             showErrorMessage(message: error.localizedDescription)
         }
         
-        if navigationController != nil {
-            navigationController?.popViewController(animated: true)
-        } else {
-            dismiss(animated: true)
-        }
+        close()
     }
     
     @IBAction func memoButtonDidTapped(_ sender: UIButton) {
@@ -92,32 +84,28 @@ final class DetailViewController: UIViewController {
             sender.backgroundColor = .white
         }
         
-        guard let bookTable = realm.object(ofType: BookTable.self, forPrimaryKey: book.isbn) else {
+        guard let bookTable = bookRepository.fetchItem(BookTable.self, forPrimaryKeyPath: book.isbn) else {
             showErrorMessage(message: "나의 책장에 저장하지않아서 메모를 저장할 수 없어요")
             return
         }
-        
-        try! realm.write {
-            bookTable.memo = memoTextView.text
-            realm.add(bookTable, update: .modified)
-        }
-    }
     
-    private func loadUserMemoData() {
-        guard let dic = UserDefaults.standard.dictionary(forKey: "myMemo") as? [String: String] else { return }
-        let memo = dic[book.title]
-        memoTextView.text = memo
+        do {
+            try bookRepository.updateItem(bookTable) { bookTable in
+                bookTable.memo = memoTextView.text
+            }
+        } catch {
+            showErrorMessage(message: error.localizedDescription)
+        }
     }
     
     func toggleAddMyBooksButton() {
-        let realm = try! Realm()
-        
-        let sameBook = realm.objects(BookTable.self).where { $0.isbn == book.isbn }
-        if sameBook.count == 1 {
-            addMyBooksButton.setTitle("책장에서 제거", for: .normal)
-        } else {
+      
+        guard let _ = bookRepository.fetchItem(BookTable.self, forPrimaryKeyPath: book.isbn) else {
             addMyBooksButton.setTitle("책장에 추가", for: .normal)
+            return
         }
+        
+        addMyBooksButton.setTitle("책장에서 제거", for: .normal)
     }
     
     private func check(_ action: MemoAction) {
@@ -142,6 +130,14 @@ final class DetailViewController: UIViewController {
         } else {
             memoTextView.textColor = .gray
             memoTextView.text = placeholderText
+        }
+    }
+    
+    private func close() {
+        if navigationController != nil {
+            navigationController?.popViewController(animated: true)
+        } else {
+            dismiss(animated: true)
         }
     }
 }

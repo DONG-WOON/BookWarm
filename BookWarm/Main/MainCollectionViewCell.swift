@@ -10,7 +10,6 @@ import UIKit
 class MainCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var favoriteButton: UIButton!
     
@@ -21,8 +20,6 @@ class MainCollectionViewCell: UICollectionViewCell {
         
         titleLabel.font = .boldSystemFont(ofSize: 18)
         titleLabel.textColor = .white
-        scoreLabel.font = .systemFont(ofSize: 12)
-        scoreLabel.textColor = .white
         favoriteButton.tintColor = .black
         self.rounded(cornerRadius: 10, isShadowBackground: true)
         
@@ -31,16 +28,15 @@ class MainCollectionViewCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         titleLabel.text = nil
-        scoreLabel.text = nil
         coverImageView.image = nil
         favoriteButton.imageView?.image = UIImage(systemName: "heart")
+        backgroundColor = nil
     }
     
     func update(book: Book) {
         titleLabel.text = book.title
-//        scoreLabel.text = "\(book.rate ?? "")"
         coverImageView.kf.setImage(with: URL(string: book.thumbnail ?? ""))
-        backgroundColor = .getColor(rgb: Color())
+        backgroundColor = .getColor(rgb: book.background ?? Color())
         
         let heartImage = book.isFavorite ? UIImage(systemName: "heart.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal) : UIImage(systemName: "heart")
         

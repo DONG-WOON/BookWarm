@@ -17,7 +17,7 @@ enum FileManagerError: Error {
     case fileIsNotExist
 }
 
-extension Realm {
+extension BookRepository {
   
     func saveImage(path fileName: String, image: UIImage?) throws {
         guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { throw FileManagerError.invalidDirectory }
