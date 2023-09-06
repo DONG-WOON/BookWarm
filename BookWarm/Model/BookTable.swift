@@ -15,11 +15,12 @@ class BookTable: Object {
     @Persisted var releaseDate: String?
     @Persisted var runtime: Int?
     @Persisted var overview: String?
-    @Persisted var rate: Double?
     @Persisted var isFavorite: Bool
     @Persisted var thumbnailURL: String?
-    @Persisted var backgroundColorTable: ColorTable?
+    @Persisted var backgroundColor: ColorTable?
     @Persisted var memo: String?
+    // automatically, but must update the schema version.
+    @Persisted var publisher: String?
     
     convenience init(book: Book) {
         self.init()
@@ -29,12 +30,12 @@ class BookTable: Object {
         self.releaseDate = book.datetime
         self.runtime = nil
         self.overview = book.overview
-        self.rate = nil
         self.isFavorite = book.isFavorite
         self.thumbnailURL = book.thumbnail
         self.isFavorite = book.isFavorite
-        self.backgroundColorTable = book.background?.toColorTable()
+        self.backgroundColor = book.background?.toColorTable()
         self.memo = book.memo
+        self.publisher = book.publisher
     }
 }
 

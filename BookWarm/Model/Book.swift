@@ -73,11 +73,11 @@ struct Book: Codable {
         self.datetime = table.releaseDate
         self.isbn = table.isbn
         self.price = nil
-        self.publisher = nil
+        self.publisher = table.publisher
         self.salePrice = nil
         self.thumbnail = table.thumbnailURL
         self.title = table.title
-        self.background = table.backgroundColorTable != nil ? table.backgroundColorTable?.toColor() : Color()
+        self.background = table.backgroundColor != nil ? table.backgroundColor?.toColor() : Color()
         self.isFavorite = table.isFavorite
         self.memo = table.memo
     }

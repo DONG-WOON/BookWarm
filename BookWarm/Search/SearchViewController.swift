@@ -32,10 +32,9 @@ class SearchViewController: UIViewController {
     private func searchBook(search: String, size: Int = 15, page: Int) {
         DispatchQueue.global().async {
             APIManager.shared.requestKakaoBookSearch(search: search, page: page) { books in
+                self.searchedBooks.append(contentsOf: books)
                 DispatchQueue.main.async {
-                    self.searchedBooks.append(contentsOf: books)
                     self.bookTableView.reloadData()
-
                 }
             } onFailure: { error in
                 self.showErrorMessage(message: error?.localizedDescription)

@@ -6,17 +6,29 @@
 //
 
 import UIKit
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        configureAppearance()
+        var config = Realm.Configuration.init(schemaVersion: 3) { migration, oldSchemaVersion in
+            if oldSchemaVersion < 1 {
+                // publisher 추가
+            }
+            if oldSchemaVersion < 2 {
+                // rate 삭제
+            }
+            if oldSchemaVersion < 3 {
+                migration.renameProperty(onType: BookTable.className(), from: "backgroundColorTable", to: "backgroundColor")
+            }
+        }
         
-        UINavigationBar.appearance().tintColor = .black
-        let tabBarAppearance = UITabBar.appearance()
-        tabBarAppearance.tintColor = .black
-        tabBarAppearance.backgroundColor = .white
+        Realm.Configuration.defaultConfiguration = config
+        
+        // 릴리즈에는 절대 포함 x, 개발과정에서만 사용할 것!
+        // configuration의 deleteRealmIfMigrationNeeded = true
         
         return true
     }
@@ -35,6 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    private func configureAppearance() {
+        UINavigationBar.appearance().tintColor = .black
+        let tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.tintColor = .black
+        tabBarAppearance.backgroundColor = .white
+    }
 }
 
