@@ -30,6 +30,7 @@ struct Book: Codable {
     let salePrice: Int?
     let thumbnail: String?
     let title: String
+    var memo: String?
     
     var background: Color?
     var isFavorite: Bool = false
@@ -51,7 +52,7 @@ struct Book: Codable {
         case thumbnail, title
     }
     
-    internal init(authors: [String]? = nil, overview: String? = nil, datetime: String? = nil, isbn: String = String(), price: Int? = nil, publisher: String? = nil, salePrice: Int? = nil, thumbnail: String? = nil, title: String = String(), background: Color = Color(), isFavorite: Bool = false) {
+    internal init(authors: [String]? = nil, overview: String? = nil, datetime: String? = nil, isbn: String = String(), price: Int? = nil, publisher: String? = nil, salePrice: Int? = nil, thumbnail: String? = nil, title: String = String(), background: Color = Color(), isFavorite: Bool = false, memo: String? = nil) {
         self.authors = authors
         self.overview = overview
         self.datetime = datetime
@@ -63,6 +64,7 @@ struct Book: Codable {
         self.title = title
         self.background = background
         self.isFavorite = isFavorite
+        self.memo = memo
     }
     
     init(table: BookTable) {
@@ -77,6 +79,7 @@ struct Book: Codable {
         self.title = table.title
         self.background = table.backgroundColorTable?.toColor()
         self.isFavorite = table.isFavorite
+        self.memo = table.memo
     }
 }
 

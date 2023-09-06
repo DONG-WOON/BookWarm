@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarAppearance = UITabBar.appearance()
         tabBarAppearance.tintColor = .black
         tabBarAppearance.backgroundColor = .white
+        UserDefaults.standard.removeObject(forKey: "myMemo")
         return true
     }
 

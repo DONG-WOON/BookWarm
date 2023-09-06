@@ -21,11 +21,7 @@ final class DetailViewController: UIViewController {
     var action: MemoAction = .read
     
     private let placeholderText = "메모를 입력해주세요."
-    private var editButtonTitle = "메모 수정" {
-        didSet {
-            memoButton.setTitle(editButtonTitle, for: .normal)
-        }
-    }
+    lazy var memoIsEditing = false
     
     lazy var dismissAction = UIAction(image: UIImage(systemName: "xmark")) { _ in
         self.dismiss(animated: true)
@@ -84,25 +80,26 @@ final class DetailViewController: UIViewController {
     }
     
     @IBAction func memoButtonDidTapped(_ sender: UIButton) {
-
-        let memoIsEditable = sender.titleLabel?.text == "메모 수정"
+        memoIsEditing.toggle()
+        memoTextView.isEditable = memoIsEditing
         
-        memoTextView.isEditable = memoIsEditable
-        memoTextView.becomeFirstResponder()
+        if memoIsEditing {
+            sender.setTitle("메모 완료", for: .normal)
+            sender.backgroundColor = .systemGray4
+        } else {
+            memoButton.setTitle("메모 수정", for: .normal)
+            sender.becomeFirstResponder()
+            sender.backgroundColor = .white
+        }
         
-        editButtonTitle = memoIsEditable ? "메모 완료" : "메모 수정"
-        sender.backgroundColor = memoIsEditable ? .systemGray4 : .white
+        guard let bookTable = realm.object(ofType: BookTable.self, forPrimaryKey: book.isbn) else {
+            showErrorMessage(message: "나의 책장에 저장하지않아서 메모를 저장할 수 없어요")
+            return
+        }
         
-        if !memoIsEditable {
-            if let memo = memoTextView.text {
-                guard var dic = UserDefaults.standard.dictionary(forKey: "myMemo") as? [String: String] else {
-                    let dic = [book.title: memo]
-                    UserDefaults.standard.setValue(dic, forKey: "myMemo")
-                    return
-                }
-                dic[book.title] = memo
-                UserDefaults.standard.setValue(dic, forKey: "myMemo")
-            }
+        try! realm.write {
+            bookTable.memo = memoTextView.text
+            realm.add(bookTable, update: .modified)
         }
     }
     
@@ -127,6 +124,8 @@ final class DetailViewController: UIViewController {
         switch action {
         case .read:
             navigationItem.leftBarButtonItem = UIBarButtonItem(primaryAction: dismissAction)
+            memoButton.isHidden = true
+            memoTextView.isHidden = true
         case .edit:
             memoButton.isHidden = false
         }
@@ -137,6 +136,13 @@ final class DetailViewController: UIViewController {
         coverImageView.kf.setImage(with: URL(string: book.thumbnail ?? ""))
         overViewTextView.text = book.overview
         addMyBooksButton.isEnabled = true
+        if let memo = book.memo, !memo.isEmpty {
+            memoTextView.textColor = .black
+            memoTextView.text = memo
+        } else {
+            memoTextView.textColor = .gray
+            memoTextView.text = placeholderText
+        }
     }
 }
 
@@ -147,6 +153,7 @@ extension DetailViewController: UITextViewDelegate {
             textView.text = nil
             textView.textColor = .black
         }
+        
         return true
     }
 }

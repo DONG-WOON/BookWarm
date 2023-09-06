@@ -19,6 +19,7 @@ class BookTable: Object {
     @Persisted var isFavorite: Bool
     @Persisted var thumbnailURL: String?
     @Persisted var backgroundColorTable: ColorTable?
+    @Persisted var memo: String?
     
     convenience init(book: Book) {
         self.init()
@@ -33,6 +34,7 @@ class BookTable: Object {
         self.thumbnailURL = book.thumbnail
         self.isFavorite = book.isFavorite
         self.backgroundColorTable = book.background?.toColorTable()
+        self.memo = book.memo
     }
 }
 
