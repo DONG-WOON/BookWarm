@@ -10,6 +10,7 @@ import RealmSwift
 
 class MainViewController: UIViewController {
     
+    let bookRepository = BookRepository()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DefaultCollectionViewFlowLayout(cellCount: 2))
     
     private var myBooks: [Book] = []
@@ -30,10 +31,10 @@ class MainViewController: UIViewController {
     }
    
     private func loadMyBookData() {
-        let realm = try! Realm()
-        let result = realm.objects(BookTable.self)
         
+        let result = bookRepository.fetchItems(BookTable.self)
         myBooks = result.map { Book(table: $0) }
+        
         collectionView.reloadData()
     }
 }

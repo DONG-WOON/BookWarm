@@ -24,6 +24,6 @@ class ExploreHeaderCollectionViewCell: UICollectionViewCell {
     }
     
     func update(with book: Book) {
-        coverImageView.image = UIImage(named: book.title ?? "")
+        coverImageView.image = UIImage(named: book.title)
     }
 }

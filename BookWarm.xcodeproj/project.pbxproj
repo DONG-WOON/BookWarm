@@ -11,6 +11,8 @@
 		7205F8FD2AA712F3008E6C4C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7205F8FC2AA712F3008E6C4C /* SnapKit */; };
 		7205F8FF2AA716BC008E6C4C /* SearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7205F8FE2AA716BC008E6C4C /* SearchViewCell.swift */; };
 		7205F9022AA73A8B008E6C4C /* Realm+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7205F9012AA73A8B008E6C4C /* Realm+FileManager.swift */; };
+		7205F9692AA85A3C008E6C4C /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7205F9682AA85A3C008E6C4C /* Repository.swift */; };
+		7205F96B2AA86E6C008E6C4C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7205F96A2AA86E6C008E6C4C /* User.swift */; };
 		722A75622A7A312200DB340E /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722A75612A7A312200DB340E /* ExploreViewController.swift */; };
 		722A75682A7A393C00DB340E /* ExploreHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722A75662A7A393C00DB340E /* ExploreHeaderCollectionViewCell.swift */; };
 		722A75692A7A393C00DB340E /* ExploreHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 722A75672A7A393C00DB340E /* ExploreHeaderCollectionViewCell.xib */; };
@@ -44,6 +46,8 @@
 		7205F8F52AA6C2C2008E6C4C /* BookTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTable.swift; sourceTree = "<group>"; };
 		7205F8FE2AA716BC008E6C4C /* SearchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewCell.swift; sourceTree = "<group>"; };
 		7205F9012AA73A8B008E6C4C /* Realm+FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+FileManager.swift"; sourceTree = "<group>"; };
+		7205F9682AA85A3C008E6C4C /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		7205F96A2AA86E6C008E6C4C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		722A75612A7A312200DB340E /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		722A75662A7A393C00DB340E /* ExploreHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		722A75672A7A393C00DB340E /* ExploreHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -95,6 +99,14 @@
 			path = Realm;
 			sourceTree = "<group>";
 		};
+		7205F9672AA85A2C008E6C4C /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				7205F9682AA85A3C008E6C4C /* Repository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		722A75632A7A312900DB340E /* Explore */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +144,7 @@
 			children = (
 				72ABE2B32A779C9600FDE2A2 /* Book.swift */,
 				7205F8F52AA6C2C2008E6C4C /* BookTable.swift */,
+				7205F96A2AA86E6C008E6C4C /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -183,6 +196,7 @@
 				72ABE29B2A779A3600FDE2A2 /* AppDelegate.swift */,
 				72ABE29D2A779A3600FDE2A2 /* SceneDelegate.swift */,
 				72AFC2D82A828FC70095D917 /* APIKey.swift */,
+				7205F9672AA85A2C008E6C4C /* Repository */,
 				72AFC2D62A828F9D0095D917 /* .gitignore */,
 				72A533212AA5C9BB00EDC7B3 /* APIManager */,
 				722BBB5B2A78EC6300E6AC90 /* Model */,
@@ -296,6 +310,7 @@
 				72ABE29C2A779A3600FDE2A2 /* AppDelegate.swift in Sources */,
 				72AFC2D92A828FC70095D917 /* APIKey.swift in Sources */,
 				72ABE2BA2A77A54D00FDE2A2 /* SearchViewController.swift in Sources */,
+				7205F9692AA85A3C008E6C4C /* Repository.swift in Sources */,
 				7205F8F62AA6C2C2008E6C4C /* BookTable.swift in Sources */,
 				722A75722A7A44E900DB340E /* ExploreTableViewCell.swift in Sources */,
 				72ABE2B82A779F2400FDE2A2 /* Extension+UIColor.swift in Sources */,
@@ -308,6 +323,7 @@
 				722A75622A7A312200DB340E /* ExploreViewController.swift in Sources */,
 				72ABE2B42A779C9600FDE2A2 /* Book.swift in Sources */,
 				722A75682A7A393C00DB340E /* ExploreHeaderCollectionViewCell.swift in Sources */,
+				7205F96B2AA86E6C008E6C4C /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
