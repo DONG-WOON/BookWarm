@@ -88,6 +88,18 @@ final class DetailViewController: UIViewController {
             showErrorMessage(message: "나의 책장에 저장하지않아서 메모를 저장할 수 없어요")
             return
         }
+<<<<<<< HEAD
+=======
+    
+        do {
+            try bookRepository.updateItem(bookTable) { bookTable in
+                bookTable.memo = memoTextView.text
+            }
+        } catch {
+            showErrorMessage(message: error.localizedDescription)
+        }
+    }
+>>>>>>> main
     
         do {
             try bookRepository.updateItem(bookTable) { bookTable in
